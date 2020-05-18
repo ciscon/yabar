@@ -206,6 +206,7 @@ void ya_create_bar(ya_bar_t * bar) {
  */
 xcb_visualtype_t * ya_get_visualtype() {
 	xcb_depth_iterator_t depth_iter;
+	if(!xcb_composite_name_window_pixmap(ya.scr)) ya.depth=24;
 	depth_iter = xcb_screen_allowed_depths_iterator (ya.scr);
 	xcb_visualtype_iterator_t visual_iter;
 	for (; depth_iter.rem; xcb_depth_next (&depth_iter)) {
