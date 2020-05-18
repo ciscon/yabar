@@ -206,6 +206,14 @@ void ya_create_bar(ya_bar_t * bar) {
  */
 xcb_visualtype_t * ya_get_visualtype() {
 	xcb_depth_iterator_t depth_iter;
+
+	//check that composite extension exists
+	xcb_composite_query_version_cookie_t comp_ver_cookie = xcb_composite_query_version(&ya.c,0,2);
+	xcb_composite_query_version_reply_t *comp_ver_reply = xcb_composite_query_version_reply(&ya.c, comp_ver_cookie, NULL);
+	if (!comp_ver_reply)
+	{
+		ya.depth=24;
+	}
 	depth_iter = xcb_screen_allowed_depths_iterator (ya.scr);
 	xcb_visualtype_iterator_t visual_iter;
 	for (; depth_iter.rem; xcb_depth_next (&depth_iter)) {

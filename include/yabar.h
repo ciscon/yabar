@@ -30,6 +30,7 @@
 #include <libconfig.h>
 
 #include <xcb/randr.h>
+#include <xcb/composite.h>
 #include <xcb/xcb_ewmh.h>
 #include <xcb/xcb_icccm.h>
 
