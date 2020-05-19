@@ -54,9 +54,9 @@ extern char *strdup(const char *s); //to suppress implicit decleration warning f
 #define PT1 printf("%d:%s:%s\n", __LINE__, __FUNCTION__, __FILE__)
 
 #define GET_ALPHA(c)	((double)(((c)>>24) & 0xff)/255.0)
-#define GET_RED(c)	((double)(((c)>>16) & 0xff)/255.0)
-#define GET_GREEN(c)	((double)(((c)>>8)  & 0xff)/255.0)
-#define GET_BLUE(c)	((double)(((c))     & 0xff)/255.0)
+#define GET_RED(c)		((double)(((c)>>16) & 0xff)/255.0)
+#define GET_GREEN(c)	((double)(((c))     & 0xff)/255.0)
+#define GET_BLUE(c)		((double)(((c)>>8)  & 0xff)/255.0)
 
 
 #define GET_MIN(A, B) ((A) < (B) ? (A) : (B))
@@ -120,15 +120,15 @@ enum {
 
 #ifdef YA_INTERNAL_EWMH
 #ifdef PLAYERCTL
-#define YA_INTERNAL_LEN 18
+#define YA_INTERNAL_LEN 19
 #else
-#define YA_INTERNAL_LEN 17
+#define YA_INTERNAL_LEN 18
 #endif
 #else
 #ifdef PLAYERCTL
-#define YA_INTERNAL_LEN 16
+#define YA_INTERNAL_LEN 17
 #else
-#define YA_INTERNAL_LEN 15
+#define YA_INTERNAL_LEN 16
 #endif
 #endif
 enum {
@@ -151,7 +151,8 @@ enum {
 	YA_INT_SONG,
 #endif
 	YA_INT_TITLE,
-	YA_INT_WORKSPACE
+	YA_INT_WORKSPACE,
+	YA_INT_WORKSPACES
 };
 
 #define NOT_INHERIT_BAR(bar) (((bar)->attr & BARA_INHERIT)==0)
@@ -335,6 +336,7 @@ struct yabar_gen_info {
 	uint32_t curws;
 	uint32_t lstws;
 	ya_ewmh_blk *ewmh_blk;
+	xcb_atom_t hints;
 #endif //YA_INTERNAL_EWMH
 	char **argv;
 	int xrandr_offset;

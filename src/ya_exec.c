@@ -18,7 +18,7 @@ static const char * const yashell = "/bin/sh";
 inline static void ya_copy_buf_from_index(ya_block_t *blk, uint32_t cur_desktop) {
 	char *cur = blk->internal->option[0];
 	uint32_t index =0;
-	for(;*cur == ' ';cur++);
+	for(;*cur!= '\0' && *cur == ' ';cur++);
 	for(;*cur != '\0'; cur++) {
 		int offset = 0;
 		if(*cur==' ')
@@ -586,6 +586,9 @@ void ya_handle_prop_notify(xcb_property_notify_event_t *ep) {
 		xcb_get_property_cookie_t ws_ck = xcb_ewmh_get_current_desktop(ya.ewmh, 0);
 		xcb_ewmh_get_current_desktop_reply(ya.ewmh, ws_ck, &ya.curws, NULL);
 	}
+	else if (ep->atom == ya.hints) {
+		//WM_HINTS changed, meaning that a window is now urgent
+	}	
 	else {
 		return;
 	}
